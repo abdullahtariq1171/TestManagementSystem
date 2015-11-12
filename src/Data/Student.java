@@ -1,12 +1,14 @@
 package Data;
 
-public class Student extends User {
-	
+import javax.swing.JOptionPane;
+
+import DAL.CourseDAO;
+
+public class Student extends User{	
 	String rollno;
 	String discipline;
-	
-	
-	public Student(final String roll_no, final String name, final String password, final int age, boolean is_male, final String discipline ) 
+
+	public Student(String roll_no, final String name, final String password, final int age, boolean is_male, final String discipline ) 
 	{
 		super(name, password, is_male, age);
 		this.rollno = roll_no ;
@@ -39,4 +41,11 @@ public class Student extends User {
 		return "Student";
 	}
 	
+	
+	//it will return only courses where Student is registered
+	 public Course[] getCourses()
+	 {
+		 JOptionPane.showMessageDialog(null, "My ROLL NO IS:" + this.rollno);
+		 return new CourseDAO().getCourses(rollno);
+	 }
 }

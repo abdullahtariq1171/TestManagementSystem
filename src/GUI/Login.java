@@ -1,28 +1,25 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-
-import DAL.Login_DAO;
-import DAL.UserDAO;
-import Data.User;
-
-import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import DAL.UserDAO;
+import Data.Course;
+import Data.User;
 
 public class Login {
-
 	private JFrame frame;
 	private JTextField username;
 	private JPasswordField password;
-
 	/**
 	 * Launch the application.
 	 */
@@ -84,17 +81,24 @@ public class Login {
 				String pass = new String(password.getPassword());
 				User success = new UserDAO().validateUser(uname, pass);
 				if(success!=null){
-					JOptionPane.showMessageDialog(null, "Login Successful");
+					//JOptionPane.showMessageDialog(null, "Login Successful");
 					frame.dispose();
+					String data = "";
 //					Profile profile = new Profile(success);
-					String data = "Name: " + success.getName();
+					data = "Name: " + success.getName();
 					data += "Password: " +success.getPassword();
 					data += "\n Age: " + success.getAge();
 					data += "\n Type: " + success.getType();
 					JOptionPane.showMessageDialog(null, data);
-					//profile.
+					data = "\n";
+					Course[] cList = success.getCourses();
+					
+					for (int i = 0; i < cList.length; i++)
+						data += "\nName: " + cList[i].getName() + ", Code: " + cList[i].getCode();
+
+					JOptionPane.showMessageDialog(null, "COURSE LIST : \n " + data);
 				}
-				else{	
+				else{
 					JOptionPane.showMessageDialog(null, "Login Unsuccessful");
 				}
 			}

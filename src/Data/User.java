@@ -45,7 +45,7 @@ public abstract class User
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
 	 public abstract String getType();
-	
+	 public abstract Course[] getCourses();
 }

@@ -41,11 +41,11 @@ public class Profile {
 	public void run(String uname){
 		
 		UserDAO udao = new UserDAO();
-		Student user = udao.getUser();
+		//Student user = udao.getUser();
 	
-		name.setText(user.getName());
-		id.setText(user.getPassword());
-		username.setText(user.getName());		
+//		name.setText(user.getName());
+//		id.setText(user.getPassword());
+//		username.setText(user.getName());		
 		frame.setVisible(true);
 		
 	}
