@@ -25,7 +25,7 @@ public class UserDAO implements IUserDAO{
 					u = new Student(rs.getString(1), rs.getString(2),rs.getString(3), rs.getInt(4),rs.getBoolean(5) ,rs.getString(7)); 			
 				} else if (rs.getInt("type") == 1 ) { //its teacher
 					u = new Teacher(rs.getString(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getBoolean(5), rs.getString(7)); 			
-				}else { //its student
+				}else { //its admin
 					u = new Admin(rs.getString(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getBoolean(5));
 				}
 				return u;

@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import Data.Course;
 
 public class CourseDAO implements ICourseDAO{
+
 	public Course[] getCourses(String userID)
 	{
 		Course[] c = null;
@@ -14,14 +15,18 @@ public class CourseDAO implements ICourseDAO{
 			Connection conn = TMSDB.dbconn();
 			String type = new UserDAO().getUserType(userID);
 			String query = "", countQuery = "";
-			if (type == "Admin"){ //only admin have access to all the course
+			if (type.equals("Admin")){ //only admin have access to all the course
 				query = "SELECT * FROM courses";
 				countQuery = "SELECT COUNT(*) FROM courses";
 			}
 			else{
-				query = "SELECT c.* FROM (users AS u JOIN course_user_relations AS ucr ON u.id=ucr.user_id ) JOIN courses AS c ON c.code=ucr.course_code WHERE u.id='l13-4219'";
-				countQuery = "SELECT COUNT(*) FROM (users AS u JOIN course_user_relations AS ucr ON u.id=ucr.user_id ) JOIN courses AS c ON c.code=ucr.course_code WHERE u.id='l13-4219'";
+				//query = "SELECT c.* FROM users AS u JOIN course_user_relations AS ucr ON u.id=ucr.user_id  JOIN courses AS c ON c.code=ucr.course_code WHERE u.id='"+userID+"'"; //"+userID+"'"
+				//countQuery = "SELECT COUNT(*) FROM users AS u JOIN course_user_relations AS ucr ON u.id=ucr.user_id  JOIN courses AS c ON c.code=ucr.course_code WHERE u.id='"+userID+"'";
+				
+				query = "SELECT c.name, c.code from courses AS c, course_user_relations AS cr where c.code = cr.course_code AND cr.user_id='"+userID+"'";
+				countQuery = "SELECT COUNT(*) from courses AS c, course_user_relations AS cr where c.code = cr.course_code AND cr.user_id='"+userID+"'";
 			}
+			
 			PreparedStatement pst = conn.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
 

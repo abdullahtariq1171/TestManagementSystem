@@ -6,10 +6,10 @@ public class TMSDB {
 
 	Connection conn= null;
 	
-	public static Connection dbconn(){
+	public static Connection dbconn(){ //C:\\Users\\Moon\\workspace\\TestingManagementSystem\\DB\\TMSdb.sqlite
 		try{
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Moon\\workspace\\TestingManagementSystem\\DB\\TMSdb.sqlite");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite://C:\\Users\\Moon\\workspace\\TestingManagementSystem\\DB\\TMSdb.sqlite"); //D:\\TMSdb.sqlite
 			//JOptionPane.showMessageDialog(null, "Connection Successful");
 			return conn;
 		}		

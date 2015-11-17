@@ -13,7 +13,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import DAL.UserDAO;
-import Data.Course;
 import Data.User;
 
 public class Login {
@@ -50,6 +49,8 @@ public class Login {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JButton login_Button = new JButton("Login");
+		frame.getRootPane().setDefaultButton(login_Button);
 		frame.getContentPane().setLayout(null);
 		
 		username = new JTextField();
@@ -73,7 +74,7 @@ public class Login {
 		title_Label.setFont(new Font("Tahoma", Font.BOLD, 16));
 		title_Label.setBounds(189, 33, 46, 23);
 		frame.getContentPane().add(title_Label);
-		JButton login_Button = new JButton("Login");
+		
 		login_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -83,20 +84,24 @@ public class Login {
 				if(success!=null){
 					//JOptionPane.showMessageDialog(null, "Login Successful");
 					frame.dispose();
+					/*
 					String data = "";
 //					Profile profile = new Profile(success);
 					data = "Name: " + success.getName();
 					data += "Password: " +success.getPassword();
 					data += "\n Age: " + success.getAge();
 					data += "\n Type: " + success.getType();
-					JOptionPane.showMessageDialog(null, data);
+					//JOptionPane.showMessageDialog(null, data);
+
 					data = "\n";
 					Course[] cList = success.getCourses();
-					
 					for (int i = 0; i < cList.length; i++)
-						data += "\nName: " + cList[i].getName() + ", Code: " + cList[i].getCode();
+						data += "\nName: " + cList[i].getName() + ", Code: " + cList[i].getCode();*/
 
-					JOptionPane.showMessageDialog(null, "COURSE LIST : \n " + data);
+					//JOptionPane.showMessageDialog(null, "COURSE LIST : \n " + data);
+					//Profile window = new Profile(success);
+					Home window = new Home(success);
+					window.run();
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Login Unsuccessful");
@@ -106,5 +111,4 @@ public class Login {
 		login_Button.setBounds(186, 201, 89, 23);
 		frame.getContentPane().add(login_Button);
 	}
-
 }
